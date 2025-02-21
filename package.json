@@ -19,6 +19,7 @@
         "@vitejs/plugin-react": "^4.3.4",
         "postcss-loader": "^8.1.1",
         "react": "^19.0.0",
-        "react-dom": "^19.0.0"
+        "react-dom": "^19.0.0",
+        "ziggy-js": "^2.5.1"
     }
 }

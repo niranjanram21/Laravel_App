@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "@inertiajs/react";
+import { useForm } from "@inertiajs/react";
 
-const Layout = ({ children }) => {
+const AuthenticatedLayout = ({ children, user }) => {
     return (
         <div className="min-h-screen bg-gray-100">
             {/* Header */}
@@ -24,15 +25,15 @@ const Layout = ({ children }) => {
                         Contact
                     </Link>
                 </nav>
-                <Link
-                    href="/login"
-                    className="hidden rounded-lg bg-gray-200 px-8 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-300 focus-visible:ring active:text-gray-700 md:text-base lg:inline-block"
-                >
-                    Login
-                </Link>
+                <div className="mt-3 space-y-1">
+                    <Link method="post" href="/logout" as="button">
+                        Log Out
+                    </Link>
+                </div>
             </header>
 
             {/* Page Content */}
+            <div user={user}></div>
             <main className="p-6">{children}</main>
 
             {/* Footer */}
@@ -43,4 +44,4 @@ const Layout = ({ children }) => {
     );
 };
 
-export default Layout;
+export default AuthenticatedLayout;

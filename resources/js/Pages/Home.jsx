@@ -1,10 +1,10 @@
 import React from "react";
-import Layout from "../Layouts/Layout";
+import GuestLayout from "@/Layouts/GuestLayout";
 
 export default function Home() {
     return (
-        <Layout>
+        <GuestLayout>
             <h1>This is home page</h1>
-        </Layout>
+        </GuestLayout>
     );
 }

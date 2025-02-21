@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "@inertiajs/react";
 
-const Layout = ({ children }) => {
+const GuestLayout = ({ children }) => {
     return (
         <div className="min-h-screen bg-gray-100">
             {/* Header */}
@@ -51,4 +51,4 @@ const Layout = ({ children }) => {
     );
 };
 
-export default Layout;
+export default GuestLayout;
