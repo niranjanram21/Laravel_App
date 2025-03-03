@@ -43,19 +43,33 @@ class AmadeusService
     public function getFlightOffers($origin, $destination, $departureDate)
     {
         $token = $this->getAccessToken();
-        $response = $this->client->get("{$this->baseUrl}/v2/shopping/flight-offers", [
-            'headers' => [
-                'Authorization' => "Bearer $token",
-                'Content-Type' => 'application/json',
-            ],
-            'query' => [
-                'originLocationCode' => $origin,
-                'destinationLocationCode' => $destination,
-                'departureDate' => $departureDate,
-                'adults' => 1,
-            ]
-        ]);
+        $cabinClasses = ['ECONOMY', 'PREMIUM_ECONOMY', 'BUSINESS', 'FIRST'];
+        $allOffers = [];
 
-        return json_decode($response->getBody(), true);
+        foreach ($cabinClasses as $cabinClass) {
+            $response = $this->client->get("{$this->baseUrl}/v2/shopping/flight-offers", [
+                'headers' => [
+                    'Authorization' => "Bearer $token",
+                    'Content-Type' => 'application/json',
+                ],
+                'query' => [
+                    'originLocationCode' => $origin,
+                    'destinationLocationCode' => $destination,
+                    'departureDate' => $departureDate,
+                    'adults' => 1,
+                    'children' => 1,
+                    'travelClass' => $cabinClass,
+                    'max' => 50,
+                ]
+            ]);
+
+            $data = json_decode($response->getBody(), true);
+
+            if (!empty($data['data'])) {
+                $allOffers = array_merge($allOffers, $data['data']);
+            }
+        }
+
+        return $allOffers;
     }
 }
